@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#18191A</color>
+    <color name="bar">#242526</color>
+    <color name="barText">#E4E6EB</color>
+    <color name="divider">#2D2E30</color>
+    <color name="grip">#6B6E73</color>
+</resources>
