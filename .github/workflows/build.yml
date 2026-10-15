@@ -4,6 +4,9 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -20,9 +23,19 @@ jobs:
           gradle-version: '8.11.1'
 
       - name: Build
-        run: gradle assembleRelease --no-daemon --stacktrace
+        run: |
+          gradle assembleRelease --no-daemon --stacktrace
+          cp app/build/outputs/apk/release/*.apk FoldFeed.apk
 
       - uses: actions/upload-artifact@v5
         with:
           name: FoldFeed-apk
-          path: app/build/outputs/apk/release/*.apk
+          path: FoldFeed.apk
+
+      - name: Publish to Releases (latest)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --yes --cleanup-tag || true
+          gh release create latest FoldFeed.apk --title "FoldFeed – bản mới nhất" \
+            --notes "Tải FoldFeed.apk bên dưới rồi cài lên điện thoại."
