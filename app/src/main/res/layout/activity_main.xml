@@ -4,100 +4,26 @@
     android:layout_height="match_parent"
     android:background="@color/bg">
 
-    <LinearLayout
-        android:id="@+id/panes"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:orientation="horizontal">
+        android:fitsSystemWindows="true">
 
-        <!-- Khung trái: bảng tin -->
-        <FrameLayout
-            android:id="@+id/leftPane"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <WebView
+            android:id="@+id/web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-            <WebView
-                android:id="@+id/left"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <ProgressBar
-                android:id="@+id/leftProg"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_gravity="top"
-                android:max="100"
-                android:progressTint="@color/accent"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <!-- Thanh kéo ở giữa -->
-        <View
-            android:id="@+id/divider"
-            android:layout_width="14dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/divider"
-            android:contentDescription="@string/divider"
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_gravity="top"
+            android:max="100"
+            android:progressTint="@color/accent"
             android:visibility="gone" />
-
-        <!-- Khung phải: chỉ hiện khi mở máy -->
-        <LinearLayout
-            android:id="@+id/rightPane"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.45"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/bar"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:orientation="horizontal">
-
-                    <Button android:id="@+id/btnNoti" style="@style/BarButton" android:text="@string/noti" />
-                    <Button android:id="@+id/btnMsg" style="@style/BarButton" android:text="@string/msg" />
-                    <Button android:id="@+id/btnMarket" style="@style/BarButton" android:text="@string/market" />
-                    <Button android:id="@+id/btnGroups" style="@style/BarButton" android:text="@string/groups" />
-                    <Button android:id="@+id/btnWatch" style="@style/BarButton" android:text="@string/watch" />
-                    <Button android:id="@+id/btnBack" style="@style/BarButton" android:text="@string/back" />
-                    <Button android:id="@+id/btnReload" style="@style/BarButton" android:text="@string/reload" />
-                    <Button android:id="@+id/btnPc" style="@style/BarButton" android:text="@string/pc" />
-                    <Button android:id="@+id/btnZoomOut" style="@style/BarButton" android:text="@string/zoom_out" />
-                    <Button android:id="@+id/btnZoomIn" style="@style/BarButton" android:text="@string/zoom_in" />
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <WebView
-                    android:id="@+id/right"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <ProgressBar
-                    android:id="@+id/rightProg"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_gravity="top"
-                    android:max="100"
-                    android:progressTint="@color/accent"
-                    android:visibility="gone" />
-            </FrameLayout>
-        </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 
     <!-- Video toàn màn hình -->
     <FrameLayout

@@ -10,15 +10,29 @@ android {
         applicationId 'vn.phucuong.foldfeed'
         minSdk 26
         targetSdk 35
-        versionCode 1
-        versionName '1.0'
+        // Số bản = số lần build trên GitHub, để app biết bản nào mới hơn
+        def run = System.getenv('GITHUB_RUN_NUMBER') ?: '1'
+        versionCode run.toInteger()
+        versionName "1.0.${run}"
+    }
+
+    // Khóa ký cố định (lưu trong GitHub Secrets) — bắt buộc để cài đè bản cập nhật
+    def ksFile = System.getenv('KEYSTORE_FILE')
+    signingConfigs {
+        release {
+            if (ksFile) {
+                storeFile file(ksFile)
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias System.getenv('KEY_ALIAS')
+                keyPassword System.getenv('KEYSTORE_PASSWORD')
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            // Ký bằng khóa debug để cài trực tiếp được, không cần lên Play Store
-            signingConfig signingConfigs.debug
+            signingConfig ksFile ? signingConfigs.release : signingConfigs.debug
         }
     }
 

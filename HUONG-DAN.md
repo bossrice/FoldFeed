@@ -1,17 +1,23 @@
 # FoldFeed – xem Facebook trên Galaxy Z Fold
 
-App Android bọc trang Facebook, bố cục thay đổi theo màn hình:
+App Android bọc trang Facebook, 1 khung toàn màn hình, dùng tốt cả khi gập và mở máy:
 
-- **Gập máy (màn hình ngoài):** 1 khung bảng tin như bình thường.
-- **Mở máy (màn hình trong):** 2 khung. Bên trái là bảng tin. Bên phải là khung phụ, có thanh nút: Thông báo · Tin nhắn · Chợ · Nhóm · Video · Lùi · Tải lại · Bản PC/ĐT · A− / A+.
 - Gập hoặc mở máy **không tải lại trang**, đang đọc dở bài nào vẫn còn nguyên.
-- **Kéo thanh xám ở giữa** để chỉnh độ rộng hai khung. Nhấn đúp thanh này để về mặc định. App nhớ độ rộng anh chọn.
-- **Nhấn giữ một link** ở khung trái để chọn: mở ở khung phải, mở bằng trình duyệt, hoặc sao chép link.
-- **A− / A+** chỉnh cỡ chữ cho cả hai khung.
-- **Bản PC:** khung phải chuyển sang giao diện máy tính của Facebook. Nên dùng khi xem Tin nhắn nếu bản điện thoại bắt cài Messenger.
+- **Tự cập nhật:** mỗi lần mở app (tối đa 30 phút/lần), app kiểm tra GitHub. Có bản mới thì tự tải về và hỏi "Cài ngay?".
+- **Nhấn giữ một link** để mở bằng trình duyệt hoặc sao chép link.
 - Đăng ảnh được (chọn nhiều ảnh), xem video toàn màn hình được.
 - Link ngoài Facebook sẽ mở bằng trình duyệt hoặc app tương ứng (Zalo, gọi điện…).
-- Đăng nhập một lần, dùng chung cho cả hai khung.
+
+## Ra bản mới
+
+Mỗi lần sửa code và đẩy lên nhánh `main`, GitHub tự build, rồi đăng file `FoldFeed.apk` và `version.json` lên Releases (mục "latest"). App trên điện thoại sẽ tự thấy bản mới.
+
+Điều kiện để tự cập nhật chạy được:
+- Kho phải để **Public**, vì app không đăng nhập GitHub.
+- Secret `KEYSTORE_PASSWORD` phải có trong Settings → Secrets and variables → Actions. Đây là mật khẩu của khóa ký `keystore/release.jks`. File khóa đã được mã hóa AES-256 bằng mật khẩu này.
+- **Không đổi khóa ký.** Đổi khóa thì điện thoại sẽ không cài đè được nữa.
+
+Link tải thẳng: https://github.com/bossrice/FoldFeed/releases/download/latest/FoldFeed.apk
 
 ---
 

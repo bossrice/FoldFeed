@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FoldFeed</string>
-    <string name="noti">🔔 Thông báo</string>
-    <string name="msg">💬 Tin nhắn</string>
-    <string name="market">🏪 Chợ</string>
-    <string name="groups">👥 Nhóm</string>
-    <string name="watch">▶ Video</string>
-    <string name="back">← Lùi</string>
-    <string name="reload">⟳</string>
-    <string name="pc">💻 Bản PC</string>
-    <string name="mobile">📱 Bản ĐT</string>
-    <string name="zoom_out">A−</string>
-    <string name="zoom_in">A+</string>
-    <string name="divider">Kéo để chỉnh độ rộng hai khung</string>
-    <string name="open_right">Mở ở khung phải</string>
     <string name="open_browser">Mở bằng trình duyệt</string>
     <string name="copy_link">Sao chép link</string>
 </resources>

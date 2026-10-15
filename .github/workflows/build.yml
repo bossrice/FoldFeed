@@ -2,6 +2,7 @@ name: Build APK
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -22,10 +23,21 @@ jobs:
         with:
           gradle-version: '8.11.1'
 
-      - name: Build
+      - name: Build (signed)
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: foldfeed
         run: |
+          if [ -z "$KEYSTORE_PASSWORD" ]; then
+            echo "::error::Chua co secret KEYSTORE_PASSWORD (Settings > Secrets and variables > Actions)"
+            exit 1
+          fi
+          export KEYSTORE_FILE="$GITHUB_WORKSPACE/keystore/release.jks"
           gradle assembleRelease --no-daemon --stacktrace
           cp app/build/outputs/apk/release/*.apk FoldFeed.apk
+          MSG=$(git log -1 --pretty=%s | sed 's/"/\\"/g')
+          echo "{\"versionCode\": ${GITHUB_RUN_NUMBER}, \"versionName\": \"1.0.${GITHUB_RUN_NUMBER}\", \"notes\": \"${MSG}\"}" > version.json
+          cat version.json
 
       - uses: actions/upload-artifact@v5
         with:
@@ -36,6 +48,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release delete latest --yes --cleanup-tag || true
-          gh release create latest FoldFeed.apk --title "FoldFeed – bản mới nhất" \
-            --notes "Tải FoldFeed.apk bên dưới rồi cài lên điện thoại."
+          if gh release view latest >/dev/null 2>&1; then
+            gh release upload latest FoldFeed.apk version.json --clobber
+          else
+            gh release create latest FoldFeed.apk version.json --title "FoldFeed – bản mới nhất" \
+              --notes "Tải FoldFeed.apk bên dưới rồi cài lên điện thoại."
+          fi
